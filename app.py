@@ -6,9 +6,29 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():  # put application's code here
-    return render_template('index.html')
+def home():
+    return render_template('home.html')
 
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/add_recipe')
+def add_recipe():
+    return render_template('add_recipe.html')
+
+@app.route('/remove_recipe')
+def remove_recipe():
+    return render_template('remove_recipe.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/search')
+def search():
+    return render_template('search.html')
 
 if __name__ == '__main__':
     app.run()
