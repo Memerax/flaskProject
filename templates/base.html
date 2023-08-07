@@ -4,10 +4,13 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+        <meta name="Joey White" content="" />
+        {% if title %}
+        <title> {{title}}</title>
+        {% else %}
+            <title> Recipe Home page</title>
+        {% endif %}
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='food.png') }}" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     </head>
@@ -15,9 +18,15 @@
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
+                <div class="sidebar-heading border-bottom bg-light">
+                    {% if title %}
+                        {{ title }}
+                        {% else %}
+                        Home
+                    {% endif %}
+                </div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="">Home</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="./">Home</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="./about">About</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="./add_recipe">Add Recipe</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="./remove_recipe">Remove Recipe</a>
@@ -51,9 +60,9 @@
                     </div>
                 </nav>
                 <!-- Page content-->
-                <div class="container-fluid">
+                <div class="h-100 d-flex align-items-center justify-content-center">
                     {% block page_content %}
-                    {% endblock %}
+                    {% endblock page_content %}
                 </div>
             </div>
         </div>
