@@ -1,10 +1,13 @@
 {% extends "base.html" %}
-
+{% block nav_content %}
+    {% for x in list_of_recipes %}
+        <a class="dropdown-item" href="#!">{{ x }}</a>
+    {% endfor %}
+{% endblock %}
 {% block page_content %}
 Welcome to the recipe site!
     <br>
     On this page you'll be able to check out popular recipes and how to make them
     <br>
     You can add,remove and search the recipe database
-
 {% endblock %}

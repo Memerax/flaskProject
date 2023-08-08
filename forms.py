@@ -9,5 +9,5 @@ class RecipeAddForm(FlaskForm):
     recipe_name = StringField("Name of Recipe: ", validators=[DataRequired(), Length(max=100)])
     ingredients = StringField("Enter ingredients: ", validators=[DataRequired()])
     instructions = TextAreaField("Recipe Instructions: ", validators=[DataRequired()])
-    preparation = TextAreaField("Preparation Instructions: ", validators=[DataRequired()])
+    serving = TextAreaField("Serving Instructions: ", validators=[DataRequired()])
     food_picture = FileField('Recipe Picture:', validators=[FileRequired()])

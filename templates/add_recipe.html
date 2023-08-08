@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% from "form-macros.html" import render_field %}
+{% block nav_content %}
+    {% for x in list_of_recipes %}
+        <a class="dropdown-item" href="#!">{{ x }}</a>
+    {% endfor %}
+{% endblock %}
 {% block page_content %}
 <section>
     <form action="" enctype="multipart/form-data" method="post">
@@ -11,7 +16,7 @@
             {{ render_field(form.recipe_name, size=20) }}
             {{ render_field(form.ingredients, size=20) }}
             {{ render_field(form.instructions, size=20) }}
-            {{ render_field(form.preparation, size=20) }}
+            {{ render_field(form.serving, size=20) }}
             {{ render_field(form.food_picture, size=20) }}
 
         </table>

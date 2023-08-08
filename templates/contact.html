@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-
+{% block nav_content %}
+    {% for x in list_of_recipes %}
+        <a class="dropdown-item" href="#!">{{ x }}</a>
+    {% endfor %}
+{% endblock %}
 {% block page_content %}
 This is contact
 {% endblock %}
