@@ -10,7 +10,9 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-
+.recipe_add{
+  display: flex;
+}
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
