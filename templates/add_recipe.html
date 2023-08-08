@@ -1,5 +1,30 @@
 {% extends "base.html" %}
-
+{% from "form-macros.html" import render_field %}
 {% block page_content %}
-This is add_recipe
+<section>
+    <form action="" enctype="multipart/form-data" method="post">
+        {{ form.csrf_token }}
+<div class="row">
+    <div class="col-md-6">
+        <h3>Enter Recipe Information</h3>
+        <table>
+            {{ render_field(form.recipe_name, size=20) }}
+            {{ render_field(form.ingredients, size=20) }}
+            {{ render_field(form.instructions, size=20) }}
+            {{ render_field(form.preparation, size=20) }}
+            {{ render_field(form.food_picture, size=20) }}
+
+        </table>
+    </div>
+        <table>
+        <tr class="submit">
+            <td></td>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+    </div>
+    </form>
+    </section>
 {% endblock %}
