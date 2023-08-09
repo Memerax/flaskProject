@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileRequired, FileField
-from wtforms.fields import StringField, TextAreaField, SubmitField
+from wtforms.fields import StringField, TextAreaField, SubmitField, SelectField
 from wtforms.fields import DateField, EmailField, TelField
 from wtforms.validators import DataRequired, Length
 
@@ -12,6 +12,9 @@ class RecipeAddForm(FlaskForm):
     serving = TextAreaField("Serving Instructions: ", validators=[DataRequired()])
     food_picture = FileField('Recipe Picture:', validators=[FileRequired()])
 
+
 class SearchRecipe(FlaskForm):
-    recipe_name = StringField("Name of Recipe: ")
-    ingredients = StringField("Enter ingredients: ")
+    choices = [('Recipe name', 'Recipe name'),
+               ('Ingredients', 'Ingredients')]
+    select = SelectField('Search fields:', choices=choices)
+    query = StringField("Query: ")

@@ -61,21 +61,27 @@ def contact():
     return render_template('contact.html', title="Contact page", list_of_recipes=update_recipe_list())
 
 
-@app.route('/search')
+@app.route('/search', methods=["GET", "POST"])
 def search():
     dir = os.listdir(app.config['SUBMITTED_DATA'])
-    my_list = []
-    for csv in dir:
-        data = pd.read_csv(os.path.join(app.config['SUBMITTED_DATA'] + csv))
-        my_list.append(data)
-    df = pd.concat(my_list)
     form = SearchRecipe()
     if form.validate_on_submit():
-        flash(f"{form.recipe_name.data} Search executed", "success")
-        recipe_name = form.recipe_name.data
-        ingredients = form.ingredients.data
-    print(df)
-    return render_template('search.html', title="Search page", list_of_recipes=update_recipe_list(),form=form)
+        flash("Search executed", "success")
+        query = form.query.data
+        choice = form.select.data
+        results = []
+        for csv in dir:
+            df = pd.read_csv(os.path.join(app.config['SUBMITTED_DATA'] + csv), index_col=False)
+            if query in df.iloc[0][choice]:
+                print("true")
+                print(choice)
+                results.append(df.iloc[0]['Recipe name'])
+        print("test")
+        print(query)
+        print(results)
+
+        return redirect(url_for('search_results'))
+    return render_template('search.html', title="Search page", list_of_recipes=update_recipe_list(), form=form)
 
 
 @app.route('/display_recipe/<name>')
@@ -90,6 +96,11 @@ def display_recipe(name):
 def delete_recipe(name):
     os.remove(os.path.join(app.config['SUBMITTED_DATA'] + name.lower().replace(" ", "_") + '.csv'))
     return redirect(url_for('remove_recipe'))
+
+
+@app.route('/search_results')
+def search_results():
+    return render_template('search_results.html', list_of_recipes=update_recipe_list())
 
 
 @app.errorhandler(404)
