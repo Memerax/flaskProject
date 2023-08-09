@@ -2,7 +2,7 @@
 {% from "form-macros.html" import render_field %}
 {% block nav_content %}
     {% for x in list_of_recipes %}
-        <a class="dropdown-item" href="#!">{{ x }}</a>
+       <span>{{ x }}</span> <a class="dropdown-item button" href="{{ url_for('display_recipe', name=x)}}">view</a>
     {% endfor %}
 {% endblock %}
 {% block page_content %}

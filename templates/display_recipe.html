@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block nav_content %}
+    {% for x in list_of_recipes %}
+        <a class="dropdown-item" href="{{ url_for('display_recipe', name=x)}}">{{ x }}</a>
+    {% endfor %}
+{% endblock %}
+{% block page_content %}
+    <div class="container">
+<h4 class="font-weight-bold mb-3">How to Make {{ recipe['Recipe name'] }}</h4>
+        <br>
+    <div class="col-md-4">
+{#      <img src="{{ url_for('static', filename='image_dir/{}'.format(beneficiary.pic)) }}">#}
+    </div>
+      <div class="col">
+        <h4 class="font-weight-bold mb-3">Ingredients: <span class="text-muted font-weight-normal"> {{ recipe['Ingredients'] }}</span></h4>
+        <h4 class="font-weight-bold mb-3">Preparation IInstructions: <span class="text-muted font-weight-normal"> {{ recipe['Preparation instructions'] }}</span></h4>
+        <h4 class="font-weight-bold mb-3">Serving Instructions: <span class="text-muted font-weight-normal"> {{ recipe['Serving Instructions'] }}</span></h4>
+    </div>
+  </div>
+{% endblock %}

@@ -11,3 +11,7 @@ class RecipeAddForm(FlaskForm):
     instructions = TextAreaField("Recipe Instructions: ", validators=[DataRequired()])
     serving = TextAreaField("Serving Instructions: ", validators=[DataRequired()])
     food_picture = FileField('Recipe Picture:', validators=[FileRequired()])
+
+class SearchRecipe(FlaskForm):
+    recipe_name = StringField("Name of Recipe: ")
+    ingredients = StringField("Enter ingredients: ")
