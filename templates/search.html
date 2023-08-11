@@ -29,4 +29,12 @@
     </div>
     </form>
     </section>
+
+    {% if results %}
+        {% for result in results %}
+        <div>
+         <a href="{{ url_for('display_recipe', name=result)}}">{{ result }}</a>
+        </div>
+    {% endfor %}
+    {% endif %}
 {% endblock %}
