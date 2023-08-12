@@ -6,7 +6,8 @@ import os
 
 
 def update_recipe_list():
-    list_of_recipes = os.listdir('./static/data_dir')
+    print(os.listdir("./static/data_dir"))
+    list_of_recipes = os.listdir("./static/data_dir")
     list_of_recipes = [x.replace(".csv", "") for x in list_of_recipes]
     return list_of_recipes
 
@@ -17,10 +18,10 @@ app.config['SUBMITTED_DATA'] = os.path.join('static', 'data_dir', '')
 app.config['SUBMITTED_IMG'] = os.path.join('static', 'image_dir', '')
 list_of_recipes = update_recipe_list()
 
-
+print(app.config['SUBMITTED_DATA'])
 @app.route('/')
 def home():
-    list_of_recipes = os.listdir('./static/data_dir')
+    list_of_recipes = os.listdir(app.config['SUBMITTED_DATA'])
     list_of_recipes = [x.replace(".csv", "") for x in list_of_recipes]
     return render_template('home.html', list_of_recipes=update_recipe_list())
 
