@@ -17,4 +17,4 @@ class SearchRecipe(FlaskForm):
     choices = [('Recipe name', 'Recipe name'),
                ('Ingredients', 'Ingredients')]
     select = SelectField('Search fields:', choices=choices)
-    query = StringField("Query: ")
+    query = StringField("Query: ",validators=[DataRequired()])

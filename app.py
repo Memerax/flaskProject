@@ -66,21 +66,20 @@ def search():
     dir = os.listdir(app.config['SUBMITTED_DATA'])
     form = SearchRecipe()
     if form.validate_on_submit():
-        flash("Search executed", "success")
         query = form.query.data
         choice = form.select.data
         results = []
         for csv in dir:
             df = pd.read_csv(os.path.join(app.config['SUBMITTED_DATA'] + csv), index_col=False)
-            if query in df.iloc[0][choice]:
-                print("true")
-                print(choice)
+            if query.lower() in df.iloc[0][choice].lower():
                 results.append(df.iloc[0]['Recipe name'])
-        print("test")
-        print(query)
-        print(results)
 
-        return redirect(url_for('search_results'))
+        if results:
+            flash(f"{len(results)} matches for {query}.",'info')
+        else:
+            flash(f"{len(results)} matches for {query}.", "warning")
+        return render_template('search.html', title="Search page", list_of_recipes=update_recipe_list(), form=form,
+                               results=results)
     return render_template('search.html', title="Search page", list_of_recipes=update_recipe_list(), form=form)
 
 
@@ -98,8 +97,8 @@ def delete_recipe(name):
     return redirect(url_for('remove_recipe'))
 
 
-@app.route('/search_results')
-def search_results():
+@app.route('/search_results/<results>')
+def search_results(results):
     return render_template('search_results.html', list_of_recipes=update_recipe_list())
 
 
