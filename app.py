@@ -6,7 +6,8 @@ import os
 
 
 def update_recipe_list():
-    list_of_recipes = os.listdir('./static/data_dir')
+    print(os.listdir("./static/data_dir"))
+    list_of_recipes = os.listdir(app.config['SUBMITTED_DATA'])
     list_of_recipes = [x.replace(".csv", "") for x in list_of_recipes]
     return list_of_recipes
 
@@ -16,11 +17,10 @@ app.config['SECRET_KEY'] = '5b1d36b483c040bed12ec570d12b6a47'
 app.config['SUBMITTED_DATA'] = os.path.join('static', 'data_dir', '')
 app.config['SUBMITTED_IMG'] = os.path.join('static', 'image_dir', '')
 list_of_recipes = update_recipe_list()
-
-
+print(list_of_recipes)
 @app.route('/')
 def home():
-    list_of_recipes = os.listdir('./static/data_dir')
+    list_of_recipes = os.listdir(app.config['SUBMITTED_DATA'])
     list_of_recipes = [x.replace(".csv", "") for x in list_of_recipes]
     return render_template('home.html', list_of_recipes=update_recipe_list())
 
@@ -108,4 +108,4 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
